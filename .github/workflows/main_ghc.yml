@@ -56,6 +56,14 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8858E5179EE445CA82EC950648C3037C }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2D07F6B252694CE39A50849D3D79F497 }}
 
+      - name: Run ARM deploy
+        uses: azure/arm-deploy@v2
+        with:
+          subscriptionId: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1C92682B215B4F759ECE7C119029D016 }}
+          resourceGroupName: 'GitHub-Copilot-Challenges'
+          template: ./deploy.json
+          parameters: ./deploy.parameters.json 
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
