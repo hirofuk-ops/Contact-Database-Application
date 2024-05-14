@@ -52,14 +52,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E44A32EDEAC24D4CB3EC9652099252C3 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8858E5179EE445CA82EC950648C3037C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2D07F6B252694CE39A50849D3D79F497 }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Run Arm deploy
         uses: azure/arm-deploy@v1
         with:
-          resourceGroupName: GitHub-Copilot-Challenges
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ secrets.AZURE_RG }}
           template: ./deploy.json
           parameters: ./deploy.parameters.json
 
